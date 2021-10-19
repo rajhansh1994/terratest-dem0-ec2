@@ -1,0 +1,45 @@
+version: '1.0'
+stages:
+- prepare
+- apply
+steps:
+  main_clone:
+   title: Cloning repository
+   type: git-clone
+   repo: "${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}"
+   revision: "${{CF_BRANCH}}"
+   stage: prepare
+  init:
+   image: hashicorp/terraform:1.0.8
+   title: Initializing Terraform
+   stage: apply
+   commands:
+    - terraform init
+  plan:
+   image: hashicorp/terraform:1.0.8
+   title: Outputting Terraform plan
+   stage: apply
+   commands:
+    - terraform plan
+  approve apply:
+    type: pending-approval
+    title: confirm apply
+    stage: apply
+    description: apply confirm
+    timeout:
+      duration: 2
+      finalState: approved
+      timeUnit: minutes
+    when:
+      branch:
+        only: [ main ]
+  apply:
+   image: hashicorp/terraform:1.0.8
+   title: Applying Terraform
+   stage: apply
+   commands:
+    - terraform apply -auto-approve
+   when:
+    branch:
+     only:
+      - main
