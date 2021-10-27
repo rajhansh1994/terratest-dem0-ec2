@@ -1,4 +1,4 @@
-/*resource "aws_instance" "example" {
+resource "aws_instance" "example" {
   # Run an Ubuntu 18.04 AMI on the EC2 instance.
   ami                    = "ami-0747bdcabd34c712a"
   instance_type          = "t2.micro"
@@ -20,9 +20,15 @@ resource "aws_security_group" "instance" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "ssh"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 # Output the instance's public IP address.
 output "public_ip" {
   value = aws_instance.example.public_ip
-}*/
+}
