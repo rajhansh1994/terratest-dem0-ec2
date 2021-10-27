@@ -10,7 +10,7 @@ steps:
    revision: "${{CF_BRANCH}}"
    stage: prepare
   init:
-   image: hashicorp/terraform:1.0.8
+   image: radut/terraform-ansible
    title: Initializing Terraform
    stage: apply
    commands:
