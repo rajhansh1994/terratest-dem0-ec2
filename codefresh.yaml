@@ -16,7 +16,7 @@ steps:
    commands:
     - terraform init
   plan:
-   image: hashicorp/terraform:1.0.8
+   image: radut/terraform-ansible
    title: Outputting Terraform plan
    stage: apply
    commands:
@@ -34,7 +34,7 @@ steps:
       branch:
         only: [ main ]
   apply:
-   image: hashicorp/terraform:1.0.8
+   image: radut/terraform-ansible
    title: Applying Terraform
    stage: apply
    commands:
