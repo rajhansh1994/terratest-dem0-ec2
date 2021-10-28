@@ -1,4 +1,4 @@
-/*resource "aws_instance" "example" {
+resource "aws_instance" "example" {
   # Run an Ubuntu 18.04 AMI on the EC2 instance.
   ami                    = "ami-0747bdcabd34c712a"
   instance_type          = "t2.micro"
@@ -37,4 +37,4 @@ resource "aws_security_group" "instance" {
 # Output the instance's public IP address.
 output "public_ip" {
   value = aws_instance.example.public_ip
-}*/
+}
